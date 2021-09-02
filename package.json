@@ -1,0 +1,27 @@
+{
+  "name": "qanda_api",
+  "version": "1.0.0",
+  "description": "An API database for the questions and answers widget.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start:dev": "npx nodemon server/index.js -w server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rpp29-sdc-sakura/QandA_API.git"
+  },
+  "author": "Jaimie Diemer",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rpp29-sdc-sakura/QandA_API/issues"
+  },
+  "homepage": "https://github.com/rpp29-sdc-sakura/QandA_API#readme",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "node": "^16.6.1",
+    "nodemon": "^2.0.12"
+  }
+}
