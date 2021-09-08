@@ -11,13 +11,12 @@ app.use(bodyParser.json());
 
 
 app.get('/test', (req, res) => {
-  console.log('attempting request')
-  return db.fetchQuestions(3)
-    .then((docs) => {
-      console.log('get doc: ', docs)
-      res.send(docs)
+  console.log('inside get')
+  return db.fetch(3)
+    .then((data) => {
+      res.send(data)
     })
-})
+});
 
 
 app.listen(port, () => {

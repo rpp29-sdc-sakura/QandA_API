@@ -3,11 +3,10 @@ const dbAddress = 'mongodb://localhost/qa';
 
 mongoose.connect(dbAddress, {
   useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useCreateIndex: true
-}, () => {
-  console.log('Success connecting to databse')
+  useUnifiedTopology: true
 })
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'MongoDB connection error'))
 
 let questionSchema = mongoose.Schema({
   id: {
@@ -50,15 +49,27 @@ let Question = mongoose.model('Question', questionSchema)
 let Answer = mongoose.model('Answer', answerSchema)
 let AnswerPhoto = mongoose.model('AnswerPhoto', answerPhotoSchema)
 
+// let fetch = (callback) => {
+//   Question.find({id: 1})
+//     .exec((err, docs) => {
+//       if (err) {
+//         console.log('Error in fetch');
+//       } else {
+//         callback(docs)
+//       }
+//     })
+// }
 
-let fetchQuestions = (productId) => {
-  console.log('inside fetch', productId)
-  return Question.find({
-    'product_id': productId
-  }).exec()
+let fetch = (productId) => {
+  console.log('inside fetch')
+  return Question.find({product_id: productId})
+  .exec()
 }
 
-
 module.exports = {
-  fetchQuestions
+  db,
+  Question,
+  Answer,
+  AnswerPhoto,
+  fetch
 }
