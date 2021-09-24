@@ -9,13 +9,23 @@ app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 // app.use(express.static(__dirname + '/../client/dist'));
 
-
 app.get('/test', (req, res) => {
-  console.log('inside get')
-  return db.fetch(3)
-    .then((data) => {
-      res.send(data)
+  // return db.updateData(num)
+  //   .then(() => {
+  //     db.fetchComplete(num)
+  //       .then((complete) => {
+  //         res.send(complete)
+  //       })
+  //   })
+  return db.callIt()
+    .then(() => {
+      console.log(Date.now())
+      res.sendStatus(200)
     })
+  // return db.fetchComplete(4)
+  //   .then((complete) => {
+  //     res.send(complete)
+  //   })
 });
 
 
