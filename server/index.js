@@ -9,15 +9,24 @@ app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 // app.use(express.static(__dirname + '/../client/dist'));
 
-
 app.get('/test', (req, res) => {
-  console.log('attempting request')
-  return db.fetchQuestions(3)
-    .then((docs) => {
-      console.log('get doc: ', docs)
-      res.send(docs)
+  // return db.updateData(num)
+  //   .then(() => {
+  //     db.fetchComplete(num)
+  //       .then((complete) => {
+  //         res.send(complete)
+  //       })
+  //   })
+  return db.callIt()
+    .then(() => {
+      console.log(Date.now())
+      res.sendStatus(200)
     })
-})
+  // return db.fetchComplete(4)
+  //   .then((complete) => {
+  //     res.send(complete)
+  //   })
+});
 
 
 app.listen(port, () => {
