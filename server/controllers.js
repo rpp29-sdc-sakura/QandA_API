@@ -4,6 +4,7 @@ const helpers = require('./helpers.js');
 
 exports.getData = (req, res) => {
   let productId = req.query.product_id
+  console.log('productId in getData: ', productId)
   models.Product.find({'_id': productId})
     .then((data) => {
       helpers.formatData(data)
@@ -19,7 +20,8 @@ exports.getData = (req, res) => {
 
 exports.likeQuestion = (req, res) => {
   //204
-  let questionId = req.param.question_id;
+  let questionId = req.params.question_id;
+  console.log('questionId in likeQuestion: ', questionId)
   models.Product.collection.updateOne(
     // filter object
     {'questions.question_id': questionId},
@@ -37,7 +39,8 @@ exports.likeQuestion = (req, res) => {
 };
 
 exports.likeAnswer = (req, res) => {
-  let answerId = req.param.answer_id;
+  let answerId = req.params.answer_id;
+  console.log('answerId in likeAnswer: ', answerId)
   models.Product.collection.updateOne(
     // filter object
     {'questions.answers.id': answerId},
@@ -55,7 +58,8 @@ exports.likeAnswer = (req, res) => {
 };
 
 exports.reportQuestion = (req, res) => {
-  let questionId = req.param.question_id;
+  let questionId = req.params.question_id;
+  console.log('questionId in reportQuestion: ', questionId)
   models.Product.collection.updateOne(
     // filter object
     {'questions.question_id': questionId},
@@ -72,7 +76,8 @@ exports.reportQuestion = (req, res) => {
 };
 
 exports.reportAnswer = (req, res) => {
-  let answerId = req.param.answer_id;
+  let answerId = req.params.answer_id;
+  console.log('answerId in reportAnswer: ', answerId)
   models.Product.collection.updateOne(
     // filter object
     {'questions.answers.id': answerId},
@@ -90,6 +95,7 @@ exports.reportAnswer = (req, res) => {
 };
 
 exports.submitQuestion = (req, res) => {
+  console.log('productId in submitQuestion: ', productId)
   let productId = req.query.product_id;
   let questionData = {
     question_id: helpers.generateRandomInt(),
@@ -118,6 +124,7 @@ exports.submitQuestion = (req, res) => {
 
 exports.submitAnswer = (req, res) => {
   let questionId = req.params.question_id;
+  console.log('questionId in submitAnswer: ', questionId)
   let answerData = {
     //id (generate large random number + 7000000)
     id: helpers.generateRandomInt(),
