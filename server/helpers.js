@@ -7,19 +7,22 @@ const generateRandomInt = () => {
 
 //create function to format data correctly
 const formatData = (data) => {
-  let formatted = [];
-  for (let i = 0; i < data.questions.length; i++) {
-    let question = data.questions[i];
-    if (question.reported === 0) {
-      let formattedQuestion = formatQuestions(question);
-      formatted.push(formattedQuestion);
-    }
-  }
+  return new Promise((resolve, reject) => {
+    let formatted = [];
+    for (let i = 0; i < data[0].questions.length; i++) {
+      let question = data[0].questions[i];
+      if (question.reported === 0) {
+        let formattedQuestion = formatQuestions(question);
 
-  return {
-    'product_id': formatted._id,
-    'results': formatted
-  };
+        formatted.push(formattedQuestion);
+      }
+    }
+
+    resolve({
+      'product_id': data[0]._id,
+      'results': formatted
+    })
+  })
 }
 
 const formatQuestions = (question) => {

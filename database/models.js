@@ -1,14 +1,14 @@
 const mongoose = require('mongoose');
 
 
-let answerPhotoSchema = mongoose.Schema({
-  id: {
-    type: Number,
-    unique: true
-  },
-  answer_id: Number,
-  url: String
-});
+// let answerPhotoSchema = mongoose.Schema({
+//   id: {
+//     type: Number,
+//     unique: true
+//   },
+//   answer_id: Number,
+//   url: String
+// });
 
 let answerSchema = mongoose.Schema({
   id: {
@@ -22,7 +22,7 @@ let answerSchema = mongoose.Schema({
   answerer_email: String,
   reported: Number,
   helpfulness: Number,
-  photos: [answerPhotoSchema]
+  photos: [String]
 });
 
 let questionSchema = mongoose.Schema({
@@ -42,16 +42,16 @@ let questionSchema = mongoose.Schema({
 
 let productSchema = mongoose.Schema({
   _id: Number,
-  results: [questionSchema]
+  questions: [questionSchema]
 });
 
-let AnswerPhoto = mongoose.model('AnswerPhoto', answerPhotoSchema)
+// let AnswerPhoto = mongoose.model('AnswerPhoto', answerPhotoSchema)
 let Answer = mongoose.model('Answer', answerSchema)
 let Question = mongoose.model('Question', questionSchema)
 let Product = mongoose.model('Product', productSchema)
 
 module.exports = {
-  AnswerPhoto,
+  // AnswerPhoto,
   Answer,
   Question,
   Product

@@ -4,11 +4,12 @@ const helpers = require('./helpers.js');
 
 exports.getData = (req, res) => {
   let productId = req.query.product_id
-  models.Product.find({_id: productId})
+  models.Product.find({'_id': productId})
     .then((data) => {
-      // need to format data before sending
-      // create a helper
-      res.status(200).send(data);
+      helpers.formatData(data)
+        .then((formatted) => {
+          res.status(200).send(formatted);
+        })
     })
     .catch((err) => {
       console.log('ERROR in getData: ', err)

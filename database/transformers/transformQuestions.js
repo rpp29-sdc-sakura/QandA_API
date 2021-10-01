@@ -25,7 +25,7 @@ const options = {
 const transform = (row) => ({
   question_id: parseInt(row.question_id),
   product_id: parseInt(row.product_id),
-  question_bodybody: row.question_body,
+  question_body: row.question_body,
   question_date: new Date(parseInt(row.question_date)).toISOString(),
   asker_name: row.asker_name,
   asker_email: row.asker_email,
