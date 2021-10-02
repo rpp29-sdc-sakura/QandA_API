@@ -14,7 +14,6 @@ const formatData = (data) => {
       let question = data[0].questions[i];
       if (question.reported === 0) {
         let formattedQuestion = formatQuestions(question);
-
         formatted.push(formattedQuestion);
       }
     }
@@ -26,6 +25,7 @@ const formatData = (data) => {
   })
 }
 
+//create function to format each question correctly
 const formatQuestions = (question) => {
   let formattedAnswers = {};
   for (let i = 0; i < question.answers.length; i++) {
@@ -55,7 +55,7 @@ const formatQuestions = (question) => {
 
 module.exports = {
   generateRandomInt,
-  formatData
+  formatData,
+  formatQuestions
 }
 
-const test = {/* add test data here */};

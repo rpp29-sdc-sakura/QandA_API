@@ -4,7 +4,7 @@
   "description": "An API database for the questions and answers widget.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha",
     "start": "npx nodemon server/index.js -w server -w database",
     "mongo-start": "brew services start mongodb-community@5.0",
     "mongo-end": "brew services stop mongodb-community@5.0",
@@ -26,8 +26,11 @@
   "dependencies": {
     "axios": "^0.21.1",
     "body-parser": "^1.19.0",
+    "chai": "^4.3.4",
+    "chai-as-promised": "^7.1.1",
     "express": "^4.17.1",
     "fast-csv": "^4.3.6",
+    "mocha": "^9.1.2",
     "mongodb": "^4.1.1",
     "mongoose": "^6.0.4",
     "node": "^16.6.1",
