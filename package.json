@@ -11,7 +11,7 @@
     "mongo:transform-q": "node ./database/transformers/transformQuestions.js",
     "mongo:transform-a": "node ./database/transformers/transformAnswers.js",
     "mongo:transform-p": "node ./database/transformers/transformPhotos.js",
-    "load": "node ./database/loader.js"
+    "loader": "node ./database/loader.js"
   },
   "repository": {
     "type": "git",

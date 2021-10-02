@@ -1,15 +1,5 @@
 const mongoose = require('mongoose');
 
-
-// let answerPhotoSchema = mongoose.Schema({
-//   id: {
-//     type: Number,
-//     unique: true
-//   },
-//   answer_id: Number,
-//   url: String
-// });
-
 let answerSchema = mongoose.Schema({
   id: {
     type: Number,
@@ -45,13 +35,24 @@ let productSchema = mongoose.Schema({
   questions: [questionSchema]
 });
 
-// let AnswerPhoto = mongoose.model('AnswerPhoto', answerPhotoSchema)
+
+// productSchema.pre('find', function () {
+//   this._startTime = Date.now();
+// });
+
+// productSchema.post('find', function () {
+//   if (this._startTime != null) {
+//     console.log('Product find runtime in Mongoose: ', Date.now() - this._startTime);
+//   }
+// });
+
+
 let Answer = mongoose.model('Answer', answerSchema)
 let Question = mongoose.model('Question', questionSchema)
 let Product = mongoose.model('Product', productSchema)
 
+
 module.exports = {
-  // AnswerPhoto,
   Answer,
   Question,
   Product

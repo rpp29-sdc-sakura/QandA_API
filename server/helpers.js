@@ -7,6 +7,7 @@ const generateRandomInt = () => {
 
 //create function to format data correctly
 const formatData = (data) => {
+  // console.log('executionStats: ', data)
   return new Promise((resolve, reject) => {
     let formatted = [];
     for (let i = 0; i < data[0].questions.length; i++) {
