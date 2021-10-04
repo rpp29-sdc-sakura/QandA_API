@@ -74,6 +74,8 @@ let updateData = (productId) => {
   })
 }
 
+//.explain("executionStats")
+
 //1000011
 
 async function callIt() {
@@ -86,7 +88,7 @@ async function callIt() {
 }
 
 let fetchComplete = (productId) => {
-  return Question.find({product_id: productId})
+  return Question.find({product_id: productId}).explain("executionStats")
 }
 
 module.exports = {

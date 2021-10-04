@@ -5,18 +5,21 @@ const helpers = require('./helpers.js');
 exports.getData = (req, res) => {
   let productId = req.query.product_id
   models.Product.find({'_id': productId})
-  // .explain("executionStats")
-    .then((data) => {
-      helpers.formatData(data)
-        .then((formatted) => {
-          res.status(200).send(formatted);
-        })
+  .then((data) => {
+    if (!data[0]) {
+      return res.status(404).end();
+    }
+    helpers.formatData(data)
+    .then((formatted) => {
+      res.status(200).send(formatted);
     })
-    .catch((err) => {
-      console.log('ERROR in getData: ', err)
-      res.status(401).end();
-    })
+  })
+  .catch((err) => {
+    console.log('ERROR in getData: ', err)
+    return res.status(404).end();
+  })
 };
+// .explain("executionStats")
 
 exports.likeQuestion = (req, res) => {
   //204
