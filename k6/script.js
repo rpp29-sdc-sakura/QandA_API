@@ -25,6 +25,17 @@ export let options = {
     //   maxVUs: 100, // if the preAllocatedVUs are not enough, we can initialize more
     //   gracefulStop: '5s'
     // },
+
+    fourthirtyfive_requests_per_second: {
+      executor: 'constant-arrival-rate',
+      rate: 435,
+      timeUnit: '1s', // 100 iterations per second, i.e. 100 RPS
+      duration: '45s',
+      preAllocatedVUs: 435, // how large the initial pool of VUs would be
+      maxVUs: 10000, // if the preAllocatedVUs are not enough, we can initialize more
+      gracefulStop: '5s'
+    },
+
     // one_hundred_requests_per_second: {
     //   executor: 'constant-arrival-rate',
     //   rate: 100,
