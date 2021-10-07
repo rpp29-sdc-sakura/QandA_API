@@ -2,7 +2,7 @@ let {getFileAsObject} = require('./transformers/fsReadAndWrite.js')
 let models = require('./models.js')
 let db = require('./index.js')
 
-models.Product.collection.drop();
+// models.Product.collection.drop();
 
 const uploadRecords = async (records) => {
   await models.Product.collection.insertMany(records);
