@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "mocha",
-    "k6": "k6 run --out influxdb=http://localhost:8086/myk6db /Users/pbandjaimie/Desktop/RPP29/SDC/QandA_API/k6/script.js",
+    "k6": "k6 run /Users/pbandjaimie/Desktop/RPP29/SDC/QandA_API/k6/script.js",
     "coverage": "nyc npm run test",
     "start": "npx nodemon server/index.js -w server -w database",
     "mongo-start": "brew services start mongodb-community@5.0",

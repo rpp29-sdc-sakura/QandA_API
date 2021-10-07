@@ -2,8 +2,6 @@ let {getFileAsObject} = require('./transformers/fsReadAndWrite.js')
 let models = require('./models.js')
 let db = require('./index.js')
 
-// models.Product.collection.drop();
-
 const uploadRecords = async (records) => {
   await models.Product.collection.insertMany(records);
 };
@@ -24,7 +22,6 @@ const uploadToDb = async () => {
       let batch = records.slice(start, end);
 
       await uploadRecords(batch);
-      console.log('Uploaded file:', i)
     }
   }
 

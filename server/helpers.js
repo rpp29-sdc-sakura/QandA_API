@@ -1,13 +1,10 @@
-//create generateRandomInt function to make unique ids
 const generateRandomInt = () => {
   let timeStamp = new Date().getTime();
   let random = Math.floor(Math.random() * (14000000 - 7000000) + 7000000);
   return parseInt(timeStamp + '' + random);
 }
 
-//create function to format data correctly
 const formatData = (data) => {
-  // console.log('executionStats: ', data)
   return new Promise((resolve, reject) => {
     let formatted = [];
     for (let i = 0; i < data[0].questions.length; i++) {
@@ -25,7 +22,6 @@ const formatData = (data) => {
   })
 }
 
-//create function to format each question correctly
 const formatQuestions = (question) => {
   let formattedAnswers = {};
   for (let i = 0; i < question.answers.length; i++) {
@@ -58,4 +54,3 @@ module.exports = {
   formatData,
   formatQuestions
 }
-

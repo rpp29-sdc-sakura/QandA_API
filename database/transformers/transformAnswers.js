@@ -13,7 +13,6 @@ const file = path.resolve(__dirname, '../csvs/answers.csv');
 const options = {
   headers: true,
   discardUnmappedColumns: true
-  // maxRows: 50
 };
 const transform = (row) => ({
   id: parseInt(row.id),
@@ -32,7 +31,6 @@ const cb = (row) => {
   let currentSection = Math.floor(pId / numSections);
 
   if (currentSection !== section) {
-    console.log(`switching from section ${section} to section ${currentSection}`);
     updateFile(section, records);
     section = currentSection;
     records = getFileAsObject(section);
