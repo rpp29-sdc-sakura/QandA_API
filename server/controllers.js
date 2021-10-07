@@ -4,7 +4,7 @@ const helpers = require('./helpers.js');
 
 exports.getData = (req, res) => {
   let productId = req.query.product_id
-  models.Product.find({'_id': productId})
+  models.Product.find({'_id': productId}).lean()
   .then((data) => {
     if (!data[0]) {
       return res.status(404).end();
@@ -15,15 +15,21 @@ exports.getData = (req, res) => {
     })
   })
   .catch((err) => {
+    console.log('ERROR in getData: ', err)
     return res.status(404).end();
   })
 };
+// .explain("executionStats")
 
 exports.likeQuestion = (req, res) => {
+  //204
   let questionId = req.params.question_id;
   models.Product.collection.updateOne(
+    // filter object
     {'questions.question_id': questionId},
+    // update object
     {$inc: {'questions.$.question_helpfulness': 1}}
+    // options
   )
     .then((data) => {
       res.status(204).send();
@@ -37,8 +43,11 @@ exports.likeQuestion = (req, res) => {
 exports.likeAnswer = (req, res) => {
   let answerId = req.params.answer_id;
   models.Product.collection.updateOne(
+    // filter object
     {'questions.answers.id': answerId},
+    // update object
     {$inc: {'questions.$.answers.$[answer].helpfulness': 1}},
+    // options
     {arrayFilters: [{'answer.id': answerId}]}
   )
     .then((data) => {
@@ -52,8 +61,11 @@ exports.likeAnswer = (req, res) => {
 exports.reportQuestion = (req, res) => {
   let questionId = req.params.question_id;
   models.Product.collection.updateOne(
+    // filter object
     {'questions.question_id': questionId},
+    // update object
     {$inc: {'questions.$.reported': 1}}
+    // options
   )
     .then((data) => {
       res.status(204).send();
@@ -66,8 +78,11 @@ exports.reportQuestion = (req, res) => {
 exports.reportAnswer = (req, res) => {
   let answerId = req.params.answer_id;
   models.Product.collection.updateOne(
+    // filter object
     {'questions.answers.id': answerId},
+    // update object
     {$inc: {'questions.$.answers.$[answer].reported': 1}},
+    // options
     {arrayFilters: [{'answer.id': answerId}]}
   )
     .then((data) => {
@@ -108,6 +123,7 @@ exports.submitQuestion = (req, res) => {
 exports.submitAnswer = (req, res) => {
   let questionId = req.params.question_id;
   let answerData = {
+    //id (generate large random number + 7000000)
     id: helpers.generateRandomInt(),
     question_id: questionIdanswerData,
     body: req.body.body,

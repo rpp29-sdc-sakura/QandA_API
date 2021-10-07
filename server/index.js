@@ -6,7 +6,9 @@ const db = require('./../database/index.js');
 const controllers = require('./controllers.js');
 
 app.use(express.json());
+// app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+// app.use(express.static(__dirname + '/../client/dist'));
 
 app.get('/qa/questions', controllers.getData);
 app.put('/qa/questions/:question_id/helpful', controllers.likeQuestion);

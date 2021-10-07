@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 
 let answerSchema = mongoose.Schema({
-  _id: Number,
   id: {
     type: Number,
     unique: true
@@ -17,7 +16,6 @@ let answerSchema = mongoose.Schema({
 });
 
 let questionSchema = mongoose.Schema({
-  _id: Number,
   question_id: {
     type: Number,
     unique: true
