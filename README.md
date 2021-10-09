@@ -10,6 +10,7 @@
 - git clone https://github.com/rpp29-sdc-sakura/QandA_API.git
 
 #### 2. cd into repo and install
+- cd QandA_API
 - npm run install
 
 #### 3. start mongo
