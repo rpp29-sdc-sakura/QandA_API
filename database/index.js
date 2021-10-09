@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const dbAddress = 'mongodb://ec2-13-58-42-204.us-east-2.compute.amazonaws.com:3000/';
+const dbAddress = 'mongodb://ip-172-31-46-80.us-east-2.compute.internal/qa';
 const db =
 mongoose.connect(dbAddress, {
   useNewUrlParser: true,
