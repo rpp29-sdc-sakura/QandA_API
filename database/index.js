@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const dbAddress = 'mongodb://localhost/qa';
+const dbAddress = 'mongodb://ec2-13-58-42-204.us-east-2.compute.amazonaws.com:3000/';
 const db =
 mongoose.connect(dbAddress, {
   useNewUrlParser: true,
