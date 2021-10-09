@@ -3,7 +3,7 @@ const models = require('./../database/models.js');
 const helpers = require('./helpers.js');
 
 exports.getData = (req, res) => {
-  let productId = req.query.product_id
+  let productId = req.query.product_id || req.params.product_id
   models.Product.find({'_id': productId}).lean()
   .then((data) => {
     if (!data[0]) {
@@ -22,14 +22,10 @@ exports.getData = (req, res) => {
 // .explain("executionStats")
 
 exports.likeQuestion = (req, res) => {
-  //204
   let questionId = req.params.question_id;
-  models.Product.collection.updateOne(
-    // filter object
+  models.Product.updateOne(
     {'questions.question_id': questionId},
-    // update object
     {$inc: {'questions.$.question_helpfulness': 1}}
-    // options
   )
     .then((data) => {
       res.status(204).send();
@@ -42,7 +38,7 @@ exports.likeQuestion = (req, res) => {
 
 exports.likeAnswer = (req, res) => {
   let answerId = req.params.answer_id;
-  models.Product.collection.updateOne(
+  models.Product.updateOne(
     // filter object
     {'questions.answers.id': answerId},
     // update object
@@ -60,7 +56,7 @@ exports.likeAnswer = (req, res) => {
 
 exports.reportQuestion = (req, res) => {
   let questionId = req.params.question_id;
-  models.Product.collection.updateOne(
+  models.Product.updateOne(
     // filter object
     {'questions.question_id': questionId},
     // update object
@@ -77,7 +73,7 @@ exports.reportQuestion = (req, res) => {
 
 exports.reportAnswer = (req, res) => {
   let answerId = req.params.answer_id;
-  models.Product.collection.updateOne(
+  models.Product.updateOne(
     // filter object
     {'questions.answers.id': answerId},
     // update object
@@ -94,7 +90,7 @@ exports.reportAnswer = (req, res) => {
 };
 
 exports.submitQuestion = (req, res) => {
-  let productId = req.query.product_id;
+  let productId = req.data.product_id;
   let questionData = {
     question_id: helpers.generateRandomInt(),
     product_id: productId,
@@ -107,7 +103,7 @@ exports.submitQuestion = (req, res) => {
     answers: []
   };
 
-  models.Product.collection.updateOne(
+  models.Product.updateOne(
     {'_id': productId},
     {$push: {'questions': questionData}},
     {upsert: true}
@@ -125,7 +121,7 @@ exports.submitAnswer = (req, res) => {
   let answerData = {
     //id (generate large random number + 7000000)
     id: helpers.generateRandomInt(),
-    question_id: questionIdanswerData,
+    question_id: questionId,
     body: req.body.body,
     date: new Date().getTime(),
     answerer_name: req.body.name,
@@ -135,7 +131,7 @@ exports.submitAnswer = (req, res) => {
     photos: req.body.photos
   };
 
-  models.Product.collection.updateOne(
+  models.Product.updateOne(
     {'question_id': questionId},
     { $push: {'questions.$.answers': answerData }}
   )
@@ -143,6 +139,7 @@ exports.submitAnswer = (req, res) => {
     res.status(201).send();
   })
   .catch((err) => {
+    console.log('error in submitAnswer: ', err)
     res.status(404).end();
   })
 };

@@ -39,7 +39,7 @@ const formatQuestions = (question) => {
           date: answer.date,
           answerer_name: answer.answerer_name,
           helpfulness: answer.helpfulness,
-          photos: answer.photos
+          photos: answer.photos || []
         };
       }
     }

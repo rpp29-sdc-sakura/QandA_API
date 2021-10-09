@@ -1,12 +1,12 @@
 const express = require('express');
 const app = express();
-const port = 5000;
+const port = 3000;
 const bodyParser = require('body-parser');
 const db = require('./../database/index.js');
 const controllers = require('./controllers.js');
 
 app.use(express.json());
-// app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 // app.use(express.static(__dirname + '/../client/dist'));
 
